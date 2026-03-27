@@ -1,7 +1,8 @@
 import asyncio
 
 from agents import Runner
-from planner_agent import WebSearchPlan, planner_agent
+from planner_agent import WebSearchPlan, planner_agent, WebSearchItem
+from search_agent import search_agent
 
 
 class ResearchManager:
@@ -30,3 +31,15 @@ class ResearchManager:
             print(f"Searching... {num_completed}/{len(tasks)} completed")
         print("Finished searching")
         return results
+
+    async def search(self, item: WebSearchItem) -> str | None:
+        """ Perform a search for the query """
+        input = f"Search term: {item.query}\nReason for searching: {item.reason}"
+        try:
+            result = await Runner.run(
+                search_agent,
+                input,
+            )
+            return str(result.final_output)
+        except Exception:
+            return None
