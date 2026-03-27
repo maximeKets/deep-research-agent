@@ -1,6 +1,6 @@
 # Architecture : Deep Research Multi-Agents
 
-Ce document présente l'architecture de votre projet `deep_research-agent`. Ce système met en place une orchestration sophistiquée à plusieurs agents AI autonomes pour automatiser de bout en bout un processus de recherche approfondie sur Internet.
+Ce document présente l'architecture du projet `deep_research-agent`. Ce système met en place une orchestration sophistiquée à plusieurs agents AI autonomes pour automatiser de bout en bout un processus de recherche approfondie sur Internet.
 
 ## 📊 1. Modèle d'Architecture Globale (Workflow)
 
