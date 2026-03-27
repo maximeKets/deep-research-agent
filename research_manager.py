@@ -1,8 +1,11 @@
 import asyncio
 
 from agents import Runner
+
+from email_agent import email_agent
 from planner_agent import WebSearchPlan, planner_agent, WebSearchItem
 from search_agent import search_agent
+from writer_agent import writer_agent, ReportData
 
 
 class ResearchManager:
@@ -55,3 +58,12 @@ class ResearchManager:
 
         print("Finished writing report")
         return result.final_output_as(ReportData)
+
+    async def send_email(self, report: ReportData) -> None:
+        print("Writing email...")
+        result = await Runner.run(
+            email_agent,
+            report.markdown_report,
+        )
+        print("Email sent")
+        return report
