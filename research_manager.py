@@ -1,6 +1,6 @@
 import asyncio
 
-from agents import Runner
+from agents import Runner, trace
 
 from email_agent import email_agent
 from planner_agent import WebSearchPlan, planner_agent, WebSearchItem
@@ -9,6 +9,21 @@ from writer_agent import writer_agent, ReportData
 
 
 class ResearchManager:
+
+
+    async def run(self, query: str):
+        """ Run the deep research process, yielding the status updates and the final report"""
+        with trace("Research trace"):
+            print("Starting research...")
+            search_plan = await self.plan_searches(query)
+            yield "Searches planned, starting to search..."
+            search_results = await self.perform_searches(search_plan)
+            yield "Searches complete, writing report..."
+            report = await self.write_report(query, search_results)
+            yield "Report written, sending email..."
+            await self.send_email(report)
+            yield "Email sent, research complete"
+            yield report.markdown_report
 
     async def plan_searches(self, query: str) -> WebSearchPlan:
         """ Plan the searches to perform for the query """
