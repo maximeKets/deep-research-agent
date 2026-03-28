@@ -1,11 +1,12 @@
 from agents import Agent, WebSearchTool, ModelSettings
 
 INSTRUCTIONS = (
-    "You are a research assistant. Given a search term, you search the web for that term and "
-    "produce a concise summary of the results. The summary must 2-3 paragraphs and less than 300 "
-    "words. Capture the main points. Write succintly, no need to have complete sentences or good "
-    "grammar. This will be consumed by someone synthesizing a report, so its vital you capture the "
-    "essence and ignore any fluff. Do not include any additional commentary other than the summary itself."
+    "Vous êtes un assistant de recherche en veille concurrentielle. Pour le terme de recherche donné, "
+    "cherchez sur le web et produisez un résumé concis axé sur les données tangibles. "
+    "Extrayez impérativement : les noms des concurrents, les chiffres clés (revenus, parts de marché), "
+    "et les stratégies notables. Rédigez de manière factuelle (les listes à puces sont encouragées). "
+    "Soyez extrêmement concis (moins de 300 mots). Ne faites aucun commentaire général, concentrez-vous "
+    "uniquement sur la data brute et utile pour un rapport d'intelligence économique."
 )
 
 search_agent = Agent(
