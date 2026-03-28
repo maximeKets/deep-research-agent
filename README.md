@@ -40,35 +40,13 @@ Le système intègre  **une interface en temps réel**, une **authentification H
 
 ## 🏗️ Architecture
 
-```text
-┌─────────────────────────────────────────────────────────────┐
-│                       Gradio UI                             │
-│       (gradio_ui.py + usage_tracker.py + HF OAuth)          │
-└────────────────────────┬────────────────────────────────────┘
-                         │ Nom de l'entreprise
-                         ▼
-              ┌──────────────────────┐
-              │   Input Guardrail    │  ← Bloque requêtes malveillantes
-              └──────────┬───────────┘
-                         │
-                         ▼
-              ┌──────────────────────┐
-              │   Research Manager   │  ← Orchestrateur central (gpt-4o-mini)
-              │ (deep_research_....py)│
-              └──┬───────────────┬───┘
-                 │               │
-        ┌────────▼───┐   ┌───────▼──────┐
-        │  Planner   │   │ Search Agent │ × N (async)
-        │   Agent    │   │  WebSearch   │
-        └────────────┘   └──────┬───────┘
-                                │ Résumés de recherche
-                         ┌──────▼───────┐
-                         │ Writer Agent │  → Rapport final Markdown
-                         └──────┬───────┘
-                                │ Handoff
-                         ┌──────▼───────┐
-                         │ Email Agent  │  → Envoi SMTP (Mailtrap)
-                         └──────────────┘
+```graph TD
+    UI["Gradio UI<br/>(gradio_ui.py + usage_tracker.py + HF OAuth)"] -->|Nom de l'entreprise| Guardrail["Input Guardrail<br/>(Bloque requêtes malveillantes)"]
+    Guardrail --> Manager["Research Manager<br/>(deep_research_manager.py)"]
+    Manager -->|Délègue| Planner["Planner Agent"]
+    Manager -->|Lance (async)| Searcher["Search Agent × N<br/>(Recherche Web)"]
+    Searcher -->|Résumés de recherche| Writer["Writer Agent<br/>(Rédige le Markdown)"]
+    Writer -->|Handoff| Emailer["Email Agent<br/>(Envoi SMTP via Mailtrap)"]
 ```
 
 ### Rôle des Agents
