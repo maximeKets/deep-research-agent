@@ -14,7 +14,11 @@ async def run(query: str):
             )
 
 with gr.Blocks() as ui:
-    gr.Markdown("# 🔍 Analyse Concurrentielle")
+    with gr.Row():
+        gr.Markdown("# 🔍 Analyse Concurrentielle")
+        gr.LoginButton()
+        gr.LogoutButton()
+
     query_textbox = gr.Textbox(
         label="Saisissez le nom d'une entreprise pour l'analyse :",
         placeholder="Ex: Tesla, Apple, OpenAI..."
