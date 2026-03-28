@@ -7,6 +7,23 @@ from guardrails import GuardrailAgent
 
 load_dotenv(override=True)
 
+planner_tool = planner_agent.as_tool(
+    tool_name="planner",
+    tool_description=(
+        "Planifier les recherches d'analyse concurrentielle. Fournissez le nom "
+        "de l'entreprise et recevez une liste de requêtes ciblées (concurrents principaux, "
+        "parts de marché, positionnement, actualités) avec leurs justifications."
+    ),
+)
+
+search_tool = search_agent.as_tool(
+    tool_name="web_search",
+    tool_description=(
+        "Effectuer une recherche web ciblée. Fournissez un terme de recherche "
+        "et sa raison d'être, et recevez un résumé concis des données marché ou concurrentielles."
+    ),
+)
+
 manager_instruction = """\
 Vous êtes le Manager d'Analyse Concurrentielle (Competitive Intelligence Manager).
 
