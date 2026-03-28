@@ -1,7 +1,7 @@
 import os
-from typing import Dict
 import smtplib
 from email.message import EmailMessage
+from typing import Dict
 from agents import Agent, function_tool
 
 
@@ -31,13 +31,17 @@ def send_email(subject: str, html_body: str) -> Dict[str, str]:
         return {"status": "error", "message": f"Erreur lors de l'envoi : {str(e)}"}
 
 
-INSTRUCTIONS = """You are able to send a nicely formatted HTML email based on a detailed report.
-You will be provided with a detailed report. You should use your tool to send one email, providing the 
-report converted into clean, well presented HTML with an appropriate subject line."""
+INSTRUCTIONS = """Vous êtes capable d'envoyer un e-mail au format HTML joliment présenté à partir d'un rapport détaillé.
+Un rapport détaillé vous sera fourni. Vous devez utiliser votre outil pour envoyer un e-mail unique, en y intégrant 
+le rapport converti en un code HTML propre et bien présenté, avec un objet approprié.
+Après l'envoi de l'e-mail, vous DEVEZ retourner le contenu intégral du rapport original comme résultat final (au format Markdown).
+Ne le résumez pas et ne le tronquez pas."""
+
 
 email_agent = Agent(
     name="Email agent",
     instructions=INSTRUCTIONS,
     tools=[send_email],
     model="gpt-4o-mini",
+    handoff_description="Convertir un rapport en HTML et l'envoyer par e-mail, puis retourner le rapport complet.",
 )
