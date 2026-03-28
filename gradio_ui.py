@@ -1,6 +1,15 @@
 from agents import trace, InputGuardrailTripwireTriggered, Runner
 import gradio as gr
 from deep_research_manager import research_manager
+from usage_tracker import has_exceeded_quota, increment_usage, get_usage, MAX_QUOTA
+
+
+async def run(query: str, profile: gr.OAuthProfile | None):
+    if profile is None:
+        yield "⚠️ **Authentification requise**\n\nVeuillez vous connecter avec votre compte Hugging Face (bouton 'Sign in with Hugging Face') pour lancer l'analyse."
+        return
+
+    username = profile.preferred_username
 
 
 async def run(query: str):
