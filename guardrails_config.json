@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "input": {
+    "version": 1,
+    "guardrails": [
+      {
+        "name": "Off Topic Prompts",
+        "config": {
+          "model": "gpt-4o-mini",
+          "confidence_threshold": 0.8,
+          "system_prompt_details": "Le seul sujet autorisé est la saisie d'un nom d'entreprise strict. Toute phrase ou contexte supplémentaire est hors sujet.",
+          "max_turns": 1
+        }
+      }
+    ]
+  }
+}
