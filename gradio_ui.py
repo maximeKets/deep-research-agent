@@ -11,6 +11,9 @@ async def run(query: str, profile: gr.OAuthProfile | None):
 
     username = profile.preferred_username
 
+    if has_exceeded_quota(username):
+        yield f"⚠️ **Limite de {MAX_QUOTA} recherches atteinte**\n\nVous avez utilisé tout votre quota disponible pour ce profil ({username})."
+        return
 
 async def run(query: str):
     with trace("Deep Research Company"):
