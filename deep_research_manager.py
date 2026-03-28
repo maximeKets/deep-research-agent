@@ -48,5 +48,7 @@ research_manager = GuardrailAgent(
     config=Path("guardrails_config.json"),
     name="Competitive Research Manager",
     instructions=manager_instruction,
+    tools=[planner_tool, search_tool],
+    handoffs=[writer_agent],
     model="gpt-4o-mini",
 )
