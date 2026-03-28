@@ -1,6 +1,5 @@
 import os
 from typing import Dict
-
 import smtplib
 from email.message import EmailMessage
 from agents import Agent, function_tool
