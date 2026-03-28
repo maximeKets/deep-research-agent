@@ -1,17 +1,20 @@
 from pydantic import BaseModel, Field
 from agents import Agent
 
-HOW_MANY_SEARCHES = 5
+HOW_MANY_SEARCHES = 4
 
-INSTRUCTIONS = f"You are a helpful research assistant. Given a query, come up with a set of web searches \
-to perform to best answer the query. Output {HOW_MANY_SEARCHES} terms to query for."
+INSTRUCTIONS = f"Vous êtes un analyste stratégique. À partir du nom de l'entreprise cible, générez {HOW_MANY_SEARCHES} requêtes de recherche web distinctes pour explorer son marché et ses concurrents.Les requêtes doivent être  optimisées pour un moteur de recherche."
+
 
 class WebSearchItem(BaseModel):
-    reason: str = Field(description="Your reasoning for why this search is important to the query.")
-    query: str = Field(description="The search term to use for the web search.")
+    reason: str = Field(
+        description="Votre justification sur l'importance de cette recherche pour l'analyse concurrentielle.")
+    query: str = Field(description="Le terme de recherche exact à utiliser sur le web.")
+
 
 class WebSearchPlan(BaseModel):
-    searches: list[WebSearchItem] = Field(description="A list of web searches to perform to best answer the query.")
+    searches: list[WebSearchItem] = Field(description="La liste des recherches web à effectuer.")
+
 
 planner_agent = Agent(
     name="PlannerAgent",
