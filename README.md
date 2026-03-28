@@ -40,7 +40,8 @@ Le système intègre  **une interface en temps réel**, une **authentification H
 
 ## 🏗️ Architecture
 
-```graph TD
+```mermaid
+graph TD
     UI["Gradio UI<br/>(gradio_ui.py + usage_tracker.py + HF OAuth)"] -->|Nom de l'entreprise| Guardrail["Input Guardrail<br/>(Bloque requêtes malveillantes)"]
     Guardrail --> Manager["Research Manager<br/>(deep_research_manager.py)"]
     Manager -->|Délègue| Planner["Planner Agent"]
