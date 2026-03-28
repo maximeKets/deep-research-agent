@@ -1,3 +1,13 @@
+---
+title: Deep Research Agent
+emoji: 🦀
+colorFrom: pink
+colorTo: blue
+sdk: gradio
+app_file: gradio_ui.py
+pinned: false
+---
+
 <div align="center">
 
 # 🔍 Deep Research Agent : Analyse Concurrentielle
