@@ -45,7 +45,7 @@ graph TD
     UI["Gradio UI<br/>(gradio_ui.py + usage_tracker.py + HF OAuth)"] -->|Nom de l'entreprise| Guardrail["Input Guardrail<br/>(Bloque requêtes malveillantes)"]
     Guardrail --> Manager["Research Manager<br/>(deep_research_manager.py)"]
     Manager -->|Délègue| Planner["Planner Agent"]
-    Manager -->|Lance (async)| Searcher["Search Agent × N<br/>(Recherche Web)"]
+    Manager -->|Lance async| Searcher["Search Agent × N<br/>(Recherche Web)"]
     Searcher -->|Résumés de recherche| Writer["Writer Agent<br/>(Rédige le Markdown)"]
     Writer -->|Handoff| Emailer["Email Agent<br/>(Envoi SMTP via Mailtrap)"]
 ```
