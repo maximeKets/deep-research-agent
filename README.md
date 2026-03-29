@@ -5,7 +5,8 @@ colorFrom: pink
 colorTo: blue
 sdk: gradio
 app_file: gradio_ui.py
-pinned: false
+pinned: true
+hf_oauth: true
 ---
 
 <div align="center">
