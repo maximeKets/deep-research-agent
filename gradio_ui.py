@@ -9,7 +9,7 @@ async def run(query: str, profile: gr.OAuthProfile | None):
         yield "⚠️ **Authentification requise**\n\nVeuillez vous connecter avec votre compte Hugging Face (bouton 'Sign in with Hugging Face') pour lancer l'analyse."
         return
 
-    username = profile.preferred_username
+    username = profile.username
 
     if has_exceeded_quota(username):
         yield f"⚠️ **Limite de {MAX_QUOTA} recherches atteinte**\n\nVous avez utilisé tout votre quota disponible pour ce profil ({username})."
