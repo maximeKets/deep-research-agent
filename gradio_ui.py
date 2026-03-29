@@ -48,7 +48,6 @@ with gr.Blocks() as ui:
     with gr.Row():
         gr.Markdown("# 🔍 Analyse Concurrentielle")
         gr.LoginButton()
-        gr.LogoutButton()
 
     query_textbox = gr.Textbox(
         label="Saisissez le nom d'une entreprise pour l'analyse :",
