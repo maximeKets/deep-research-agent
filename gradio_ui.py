@@ -22,16 +22,25 @@ async def run(query: str, profile: gr.OAuthProfile | None):
             result = Runner.run_streamed(research_manager, query, max_turns=30)
 
             async for event in result.stream_events():
+                # Gestion des transferts d'agents
+                if type(event).__name__ == "AgentUpdatedStreamEvent":
+                    agent_name = event.new_agent.name if hasattr(event, "new_agent") else "spécialisé"
+                    gr.Info(f"🤝 Transfert à l'agent : {agent_name}...")
+                    continue
+                    
+                # Sécurité : ignorer les événements qui n'ont pas l'attribut data
+                if not hasattr(event, "data"):
+                    continue
+                    
                 event_type = type(event.data).__name__
 
-                # Détection d'événements spécifiques de openai-agents
                 if "ToolCall" in event_type or (hasattr(event.data, "type") and event.data.type == "function"):
                     tool_name = getattr(event.data, "name", "outil") if hasattr(event.data, "name") else "recherche"
                     gr.Info(f"🛠️ Exécution de l'outil : {tool_name}")
                 elif "Agent" in event_type and "Transfer" in event_type:
                     gr.Info("🤝 Transfert à un autre agent spécialisé...")
                 elif "RunStep" in event_type:
-                    pass  # ignore verbose generic steps
+                    pass
 
             increment_usage(username)
             current_usage = get_usage(username)
