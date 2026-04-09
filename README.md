@@ -13,6 +13,9 @@ hf_oauth: true
 
 # 🔍 Deep Research Agent : Analyse Concurrentielle
 
+[![GHCR](https://img.shields.io/badge/GHCR-Ready-2ea44f?logo=github)](https://github.com/maximeKets/deep-research-agent/packages)
+[![DockerHub](https://img.shields.io/badge/DockerHub-Ready-2496ed?logo=docker)](https://hub.docker.com/r/maximeks/deep-research-agent)
+
 **Un système multi-agents autonome conçu pour réaliser une analyse de marché complète sur n'importe quelle entreprise et d'envoyer un rapport détaillé par email.**
 
 [![Python](https://img.shields.io/badge/Python-3.12%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
@@ -132,3 +135,15 @@ deep-research-agent/
 <div align="center">
   Made with ❤️ and lots of async/await
 </div>
+
+## 🐳 Déploiement via Docker
+
+Ce projet est distribué sous forme d'image Docker multi-architecture (AMD64 / ARM64).
+
+```bash
+# 1. Récupérer la dernière image depuis GitHub Container Registry
+docker pull ghcr.io/maximeKets/deep-research-agent:latest
+
+# 2. Lancer le conteneur (ajuste le port si nécessaire)
+docker run -p 8000:8000 ghcr.io/maximeKets/deep-research-agent:latest
+```
