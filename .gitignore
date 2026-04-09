@@ -1,6 +1,5 @@
 /.env
 /.venv
-/uv.lock
 /LICENSE
 /usage_db.json
 *.log
